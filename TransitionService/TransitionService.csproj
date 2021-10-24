@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DALContracts\DALContracts.csproj" />
     <ProjectReference Include="..\ProjectContracts\ProjectContracts.csproj" />
   </ItemGroup>
 
