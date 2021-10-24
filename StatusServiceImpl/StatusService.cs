@@ -1,5 +1,6 @@
 ﻿using DALContracts;
 using ProjectContracts;
+using ProjectDTO;
 using System;
 
 namespace StatusServiceImpl
@@ -40,6 +41,18 @@ namespace StatusServiceImpl
                 }
             }
             return isStatusDeletedSuccessfully;
+        }
+
+        public StatusDTO[] GetAllStatuses()
+        {
+            var dataset = DALServices.ExecuteQuery("GetAllStatuses");
+            StatusDTO[] retval = new StatusDTO[dataset.Tables[0].Rows.Count];
+            for (var i = 0; i < dataset.Tables[0].Rows.Count; i++)
+            {
+                retval[i] = new StatusDTO();
+                retval[i].statusName = (string)dataset.Tables[0].Rows[i]["statusName"];
+            }
+            return retval;
         }
 
         public bool IsStatusExist(string i_StatusName)

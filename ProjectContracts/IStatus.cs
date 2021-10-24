@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DALContracts;
+using ProjectDTO;
+using System;
 
 namespace ProjectContracts
 {
@@ -7,5 +9,8 @@ namespace ProjectContracts
         public bool AddNewStatus(string i_StatusName);
         public bool IsStatusExist(string i_StatusName);
         public bool DeleteExistStatus(string i_StatusName);
+        public IDAL DALServices { get; set; }
+
+        StatusDTO[] GetAllStatuses();
     }
 }

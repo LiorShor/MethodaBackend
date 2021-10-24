@@ -3,7 +3,7 @@ using ProjectContracts;
 using ProjectDTO;
 using System;
 
-namespace TransitionService
+namespace TransitionServiceImpl
 {
     public class TransitionService : ITransition
     {
@@ -29,17 +29,15 @@ namespace TransitionService
         public bool DeleteExistTransition(TransitionDTO i_TransitionDetails)
         {
             bool isStatusDeletedSuccessfully = false;
-            IParameter paramID = DALServices.CreateParameter("id", i_TransitionDetails.TransitionID);
-            IParameter paramFrom = DALServices.CreateParameter("from", i_TransitionDetails.From);
-            IParameter paramTo = DALServices.CreateParameter("to", i_TransitionDetails.To);
+            IParameter paramTransitionID = DALServices.CreateParameter("id", i_TransitionDetails.TransitionID);
             if (IsTransitionExist(i_TransitionDetails))
             {
                 try
                 {
-                    DALServices.ExecuteNonQuery("DeleteTransition", paramID, paramFrom, paramTo);
+                    DALServices.ExecuteNonQuery("DeleteTransition", paramTransitionID);
                     isStatusDeletedSuccessfully = true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     isStatusDeletedSuccessfully = false;
                 }
@@ -50,8 +48,8 @@ namespace TransitionService
         public bool IsTransitionExist(TransitionDTO i_TransitionDetails)
         {
             bool isStatusExistInDatabase = false;
-            var paramFrom = DALServices.CreateParameter("id", i_TransitionDetails.From);
-            var paramTo = DALServices.CreateParameter("id", i_TransitionDetails.To);
+            var paramFrom = DALServices.CreateParameter("from", i_TransitionDetails.From);
+            var paramTo = DALServices.CreateParameter("to", i_TransitionDetails.To);
             var dataset = DALServices.ExecuteQuery("IsTransitionExist", paramFrom, paramTo);
             if (dataset.Tables[0].Rows.Count != 0)
             {

@@ -1,7 +1,5 @@
-﻿using ProjectDTO;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DALContracts;
+using ProjectDTO;
 
 namespace ProjectContracts
 {
@@ -10,5 +8,6 @@ namespace ProjectContracts
         public bool AddNewTransition(TransitionDTO i_TransitionDetails);
         public bool DeleteExistTransition(TransitionDTO i_TransitionDetails);
         public bool IsTransitionExist(TransitionDTO i_TransitionDetails);
+        public IDAL DALServices { get; set; }
     }
 }

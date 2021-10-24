@@ -1,12 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TransitionDTO\ProjectDTO.csproj" />
+    <ProjectReference Include="..\DALContracts\DALContracts.csproj" />
+    <ProjectReference Include="..\ProjectDTO\ProjectDTO.csproj" />
   </ItemGroup>
 
 </Project>
