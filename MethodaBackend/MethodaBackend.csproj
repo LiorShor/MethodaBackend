@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Config\Config.csproj" />
+    <ProjectReference Include="..\DALContracts\DALContracts.csproj" />
+    <ProjectReference Include="..\InfrastructureDAL\InfrastructureDAL.csproj" />
+    <ProjectReference Include="..\ProjectContracts\ProjectContracts.csproj" />
+    <ProjectReference Include="..\StatusServiceImpl\StatusServiceImpl.csproj" />
+    <ProjectReference Include="..\TransitionService\TransitionServiceImpl.csproj" />
+  </ItemGroup>
+
 </Project>
