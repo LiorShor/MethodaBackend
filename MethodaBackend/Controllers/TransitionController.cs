@@ -19,25 +19,24 @@ namespace MethodaBackend.Controllers
         }
 
         [HttpPost]
-        public bool AddNewTransition([FromBody] TransitionDTO i_TransitionDetails)
+        public void AddNewTransition([FromBody] TransitionDTO i_TransitionDetails)
         {
-            bool isStatusAddedSuccessfully = false;
             if (!m_TransitionService.IsTransitionExist(i_TransitionDetails))
             {
-                isStatusAddedSuccessfully = m_TransitionService.AddNewTransition(i_TransitionDetails);
+                m_TransitionService.AddNewTransition(i_TransitionDetails);
             }
-            return isStatusAddedSuccessfully;
         }
 
         [HttpPost]
-        public bool RemoveTransition([FromBody] TransitionDTO i_TransitionDetails)
+        public void RemoveTransition([FromBody] TransitionDTO i_TransitionDetails)
         {
-            bool isStatusAddedSuccessfully = false;
-            if (m_TransitionService.IsTransitionExist(i_TransitionDetails))
-            {
-                isStatusAddedSuccessfully = m_TransitionService.DeleteExistTransition(i_TransitionDetails);
-            }
-            return isStatusAddedSuccessfully;
+            m_TransitionService.DeleteExistTransition(i_TransitionDetails);
+        }
+
+        [HttpPost]
+        public TransitionDTO[] GetAllTransitions()
+        {
+            return m_TransitionService.GetAllTransitions();
         }
     }
 }

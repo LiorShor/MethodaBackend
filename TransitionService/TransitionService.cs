@@ -11,7 +11,7 @@ namespace TransitionServiceImpl
         public bool AddNewTransition(TransitionDTO i_TransitionDetails)
         {
             bool isStatusAddedSuccessfully;
-            IParameter paramID = DALServices.CreateParameter("id", i_TransitionDetails.TransitionID);
+            IParameter paramID = DALServices.CreateParameter("id", i_TransitionDetails.ID);
             IParameter paramFrom = DALServices.CreateParameter("from", i_TransitionDetails.From);
             IParameter paramTo = DALServices.CreateParameter("to", i_TransitionDetails.To);
             try
@@ -29,7 +29,7 @@ namespace TransitionServiceImpl
         public bool DeleteExistTransition(TransitionDTO i_TransitionDetails)
         {
             bool isStatusDeletedSuccessfully = false;
-            IParameter paramTransitionID = DALServices.CreateParameter("id", i_TransitionDetails.TransitionID);
+            IParameter paramTransitionID = DALServices.CreateParameter("id", i_TransitionDetails.ID);
             if (IsTransitionExist(i_TransitionDetails))
             {
                 try
@@ -43,6 +43,20 @@ namespace TransitionServiceImpl
                 }
             }
             return isStatusDeletedSuccessfully;
+        }
+
+        public TransitionDTO[] GetAllTransitions()
+        {
+            var dataset = DALServices.ExecuteQuery("GetAllTransitions");
+            TransitionDTO[] retval = new TransitionDTO[dataset.Tables[0].Rows.Count];
+            for (var i = 0; i < dataset.Tables[0].Rows.Count; i++)
+            {
+                retval[i] = new TransitionDTO();
+                retval[i].ID = (string)dataset.Tables[0].Rows[i]["id"];
+                retval[i].From = (string)dataset.Tables[0].Rows[i]["from"];
+                retval[i].To = (string)dataset.Tables[0].Rows[i]["to"];
+            }
+            return retval;
         }
 
         public bool IsTransitionExist(TransitionDTO i_TransitionDetails)

@@ -18,27 +18,25 @@ namespace MethodaBackend.Controllers
         }
 
         [HttpPost]
-        public bool AddNewStatus([FromBody] string i_StatusDetails)
+        public bool AddNewStatus([FromBody] StatusDTO i_StatusDetails)
         {
             bool isStatusAddedSuccessfully = false;
-            if(!m_StatusService.IsStatusExist(i_StatusDetails))
+            if(!m_StatusService.IsStatusExist(i_StatusDetails.statusName))
             {
-                isStatusAddedSuccessfully = m_StatusService.AddNewStatus(i_StatusDetails);
+                isStatusAddedSuccessfully = m_StatusService.AddNewStatus(i_StatusDetails.statusName);
             }
             return isStatusAddedSuccessfully;
         }
 
         [HttpPost]
-        public bool RemoveStatus([FromBody] string i_StatusDetails)
+        public void RemoveStatus([FromBody] StatusDTO i_StatusDetails)
         {
-            bool isStatusAddedSuccessfully = false;
-            if (!m_StatusService.IsStatusExist(i_StatusDetails))
+            if (m_StatusService.IsStatusExist(i_StatusDetails.statusName))
             {
-                isStatusAddedSuccessfully = m_StatusService.DeleteExistStatus(i_StatusDetails);
+                m_StatusService.DeleteExistStatus(i_StatusDetails.statusName);
             }
-            return isStatusAddedSuccessfully;
         }
-        [HttpGet]
+        [HttpPost]
         public StatusDTO[] GetAllStatuses()
         {
             return m_StatusService.GetAllStatuses();
